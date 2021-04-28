@@ -172,6 +172,11 @@ nav.shrink {
 # Hero Section
 --------------------------------------------------------------*/
 
+.mycursor {
+	cursor:pointer;
+}
+
+
 
 #hero {
 	text-align: center;
@@ -933,5 +938,7 @@ span.writer {
 
 
 
+.acolor:hover {
+	color:white !important;
 
-
+}
