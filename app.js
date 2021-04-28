@@ -4,6 +4,11 @@ const exphbs  = require('express-handlebars');
 const  app = express()
 const hostName = 'localhost'
 const port = 3000
+const mongoose = require('mongoose')
+
+
+const mainRoutes = require('./routes/main.js')
+
 
 
 app.use(express.static('public')) //All static files....
@@ -11,32 +16,9 @@ app.use(express.static('public')) //All static files....
 app.engine('handlebars', exphbs())
 app.set('view engine', 'handlebars')
 
-//___________________________________  get ________________________________
-app.get('/',(req,res) =>{
-    res.render('mysite/index')
-})
+//___________________________________  ROUTES ________________________________
 
-app.get('/about',(req,res) =>{
-    res.render('mysite/about')
-})
-
-app.get('/blog',(req,res) => {
-    res.render('mysite/blog')
-})
-
-app.get('/contact',(req,res) => {
-    res.render('mysite/contact')
-})
-
-app.get('/login',(req,res) => {
-    res.render('mysite/login')
-})
-
-app.get('/register', (req,res) => {
-    res.render('mysite/register')
-})
-
-
+app.use(mainRoutes)
 
 //________________________________________  LOCALHOST ___________________
 app.listen(port,hostName, () => {

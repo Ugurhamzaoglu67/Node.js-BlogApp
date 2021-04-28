@@ -20,7 +20,8 @@
   "homepage": "https://github.com/Ugurhamzaoglu67/Node.js-BlogApp#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "mongoose": "^5.12.6"
   },
   "devDependencies": {
     "express-handlebars": "^5.3.0"

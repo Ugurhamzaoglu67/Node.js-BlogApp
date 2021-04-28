@@ -152,6 +152,8 @@ nav.navbar-container {
 #mainNav .navbar-nav .nav-item .nav-link.active,
 #mainNav .navbar-nav .nav-item .nav-link:hover {
 	color: #469c58;
+	background-color:white;
+	font-weight: 800;
 }
 
 nav.shrink {
@@ -940,5 +942,6 @@ span.writer {
 
 .acolor:hover {
 	color:white !important;
+	background-color:transparent!important;
 
 }
