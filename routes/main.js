@@ -27,16 +27,7 @@ router.get('/register', (req,res) => {
     res.render('mysite/register')
 })
 
-router.get('/posts/add-post',(req,res) => {
-    res.render('mysite/addPost')
-})
 
-
-router.post('/post/test',(req,res) => {
-
-
-    res.send('qwewq')
-})
 
 
 module.exports = router
