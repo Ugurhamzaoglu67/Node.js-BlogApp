@@ -5,10 +5,13 @@ const port = 3000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 require('dotenv').config()
+
 const Handlebars = require('handlebars')
 const exphbs  = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
+
+const fileUpload = require('express-fileupload')
 
 
 //_________________ db connect__________________________
@@ -22,6 +25,7 @@ mongoose.connect(dbUrl, { useNewUrlParser:true, useUnifiedTopology:true, useCrea
     .catch((err)=> console.log(err))
 
 
+app.use(fileUpload())
 
 
 const mainRoutes = require('./routes/main.js')
