@@ -41,6 +41,15 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 
+const myMiddleware = (req,res,next) =>{
+
+    console.log("Hello Amerika...")
+    next()
+}
+
+app.use('/',myMiddleware)
+
+
 
 
 //____________________________ bodyParser (for data from the form)________________________________

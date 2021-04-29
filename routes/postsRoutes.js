@@ -29,10 +29,9 @@ router.post('/test',(req,res) => {
     let post_image = req.files.post_image
     post_image.mv(path.resolve(__dirname,'../public/img/postimg',post_image.name))
 
-
     Post.create({
             ...req.body,
-            post_image:`/public/img/${post_image.name}`
+            post_image:`/img/postimg/${post_image.name}`
     })
     .then(() => {
         console.log("Post was created successfully...")
