@@ -5,11 +5,10 @@ const port = 3000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-
 const Handlebars = require('handlebars')
-const exphbs  = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
-
+const exphbs  = require('express-handlebars');
+const generateDate = require('./helpers/generateDate').generateDate
 
 const fileUpload = require('express-fileupload')
 
@@ -34,20 +33,19 @@ const posts = require('./routes/postsRoutes')
 
 app.use(express.static('public')) //All static files....
 
+
+
 //___________________________________ Handlebars Config______________________
 app.engine('handlebars', exphbs({
-    handlebars: allowInsecurePrototypeAccess(Handlebars)
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    defaultLayout: 'main',
+    helpers: {generateDate}
+
 }));
 app.set('view engine', 'handlebars');
 
 
-const myMiddleware = (req,res,next) =>{
 
-    console.log("Hello Amerika...")
-    next()
-}
-
-app.use('/',myMiddleware)
 
 
 
