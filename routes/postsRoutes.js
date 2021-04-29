@@ -6,12 +6,29 @@ router.get('/add-post',(req,res) => {
     res.render('mysite/addPost')
 })
 
+
+router.get('/detail/:id',(req,res)=> {
+
+    Post.findById(req.params.id)
+        .then(post => {
+            res.render('mysite/singlePost',{
+                post:post
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
+})
+
+
 router.post('/test',(req,res) => {
 
     Post.create(req.body)
         .then(() => {
             console.log("Post was created successfully...")
-            res.redirect('/posts/add-post')
+            res.redirect('/blog')
         })
         .catch(err =>{
             console.log(err)

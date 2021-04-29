@@ -1,12 +1,15 @@
-const path = require('path')
 const express = require('express')
-const exphbs  = require('express-handlebars');
 const  app = express()
 const hostName = 'localhost'
 const port = 3000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 require('dotenv').config()
+const Handlebars = require('handlebars')
+const exphbs  = require('express-handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
+
 
 //_________________ db connect__________________________
 
@@ -21,15 +24,20 @@ mongoose.connect(dbUrl, { useNewUrlParser:true, useUnifiedTopology:true, useCrea
 
 
 
-
 const mainRoutes = require('./routes/main.js')
 const posts = require('./routes/postsRoutes')
 
 
 app.use(express.static('public')) //All static files....
 
-app.engine('handlebars', exphbs())
-app.set('view engine', 'handlebars')
+//___________________________________ Handlebars Config______________________
+app.engine('handlebars', exphbs({
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
+}));
+app.set('view engine', 'handlebars');
+
+
+
 
 //____________________________ bodyParser (for data from the form)________________________________
 
@@ -38,10 +46,9 @@ app.use(bodyParser.json())
 
 
 
-
 //___________________________________  ROUTES ________________________________
 
 app.use(mainRoutes)
 app.use('/posts',posts)
 
-//________________________________________  LOCALHOST ___________________
+

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const Post = require('../models/Post')
 
 
 router.get('/',(req,res) =>{
@@ -12,7 +12,17 @@ router.get('/about',(req,res) =>{
 })
 
 router.get('/blog',(req,res) => {
-    res.render('mysite/blog')
+
+    Post.find({})
+        .then((posts) => {
+            res.render('mysite/blog', {
+                posts:posts
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
 })
 
 router.get('/contact',(req,res) => {
