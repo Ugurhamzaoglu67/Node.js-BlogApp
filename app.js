@@ -15,6 +15,11 @@ const MongoStore = require('connect-mongo');
 const fileUpload = require('express-fileupload')
 
 
+const mainRoutes = require('./routes/main.js')
+const postsRoutes = require('./routes/postsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
+const adminRoutes = require('./routes/adminRoutes/admin_index.js')
+
 //_________________ db connect_______________________________________________
 const dbUrl = `mongodb+srv://Nodeblog_db:${process.env.DB_PASS}@cluster0.qddi3.mongodb.net/Nodeblog?retryWrites=true&w=majority`
 
@@ -71,11 +76,6 @@ app.use((req, res, next) => {
 
 
 
-
-const mainRoutes = require('./routes/main.js')
-const postsRoutes = require('./routes/postsRoutes')
-const usersRoutes = require('./routes/usersRoutes')
-
 app.use(express.static('public')) //All static files....
 
 
@@ -106,5 +106,6 @@ app.use(bodyParser.json())
 app.use(mainRoutes)
 app.use('/posts',postsRoutes)
 app.use('/users',usersRoutes)
+app.use('/admin',adminRoutes)
 
 

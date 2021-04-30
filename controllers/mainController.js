@@ -33,7 +33,4 @@ exports.mainContact = (req,res) => {
     res.render('mysite/contact')
 }
 
-//____________________________________ ADMIN / w \ ___________________________
-exports.mainAdmin = (req,res) => {
-    res.render('mysite/admin')
-}
+
