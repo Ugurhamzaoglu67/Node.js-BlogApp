@@ -1,36 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const Post = require('../models/Post')
+
+const mainController = require('../controllers/mainController')
 
 
-router.get('/',(req,res) =>{
-    console.log(req.session)
 
-    res.render('mysite/index')
-})
 
-router.get('/about',(req,res) =>{
-    res.render('mysite/about')
-})
 
-router.get('/blog',(req,res) => {
-
-    Post.find({})
-        .then((posts) => {
-            res.render('mysite/blog', {
-                posts:posts
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-})
-
-router.get('/contact',(req,res) => {
-    res.render('mysite/contact')
-})
-
+router.get('/',mainController.mainIndex)
+router.get('/about',mainController.mainAbout)
+router.get('/blog',mainController.mainBlog)
+router.get('/contact',mainController.mainContact)
+router.get('/admin',mainController.mainAdmin)
 
 
 

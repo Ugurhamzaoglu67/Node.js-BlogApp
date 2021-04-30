@@ -4,16 +4,12 @@ const userController = require('../controllers/userControllers')
 
 //________________________________________ users/register___________________
 router.get('/register',userController.getRegister)
-
-
 router.post('/register',userController.postRegister)
 
 
 //________________________________________ users/login___________________
 router.get('/login',userController.getLogin)
-
 router.post('/login',userController.postLogin)
-
 router.get('/logout',userController.getLogout)
 
 module.exports = router
