@@ -63,11 +63,12 @@ ABOUTUS Section
                                 </span>
                             </td>
                             <td>
-                                <a href="#">
-                                    <button class="btn btn-danger">
+                                <form action="/admin/categories/{{id}}?_method=DELETE" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger">
                                         Delete
                                     </button>
-                                </a>
+                                </form>
                             </td>
                             <td>
                                 <a href="#">

@@ -13,12 +13,13 @@ const expressSession = require('express-session')
 const MongoStore = require('connect-mongo');
 
 const fileUpload = require('express-fileupload')
+const methodOverride = require('method-override')
 
 
-const mainRoutes = require('./routes/main.js')
-const postsRoutes = require('./routes/postsRoutes')
-const usersRoutes = require('./routes/usersRoutes')
-const adminRoutes = require('./routes/adminRoutes/admin_index.js')
+
+
+
+
 
 //_________________ db connect_______________________________________________
 const dbUrl = `mongodb+srv://Nodeblog_db:${process.env.DB_PASS}@cluster0.qddi3.mongodb.net/Nodeblog?retryWrites=true&w=majority`
@@ -35,7 +36,7 @@ mongoose.connect(dbUrl, {
 
 
 app.use(fileUpload())
-
+app.use(methodOverride('_method'))
 
 //___________________________________ SESSION ______________________________________
 app.use(expressSession({
@@ -75,7 +76,6 @@ app.use((req, res, next) => {
 
 
 
-
 app.use(express.static('public')) //All static files....
 
 
@@ -85,11 +85,9 @@ app.engine('handlebars', exphbs({
     defaultLayout: 'main',
     helpers: {generateDate}
 
+
 }));
 app.set('view engine', 'handlebars');
-
-
-
 
 
 
@@ -103,9 +101,12 @@ app.use(bodyParser.json())
 
 //___________________________________  ROUTES ________________________________
 
+const mainRoutes = require('./routes/main.js')
+const postsRoutes = require('./routes/postsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
+const adminRoutes = require('./routes/adminRoutes/admin_index.js')
+
 app.use(mainRoutes)
 app.use('/posts',postsRoutes)
 app.use('/users',usersRoutes)
 app.use('/admin',adminRoutes)
-
-

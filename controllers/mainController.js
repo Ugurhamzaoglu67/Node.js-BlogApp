@@ -17,7 +17,7 @@ exports.mainAbout = (req,res) =>{
 //____________________________________ BLOG ___________________________
 exports.mainBlog = (req,res) => {
 
-    Post.find({})
+    Post.find({}).sort( { $natural : -1 } )
         .then((posts) => {
             res.render('mysite/blog', {
                 posts:posts
