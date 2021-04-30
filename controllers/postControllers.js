@@ -1,7 +1,7 @@
 const Post = require('../models/Post')
 const Category = require('../models/Category')
 const path = require('path')
-
+const User = require('../models/Users')
 
 
 //___________________________________________ getAddPost_____________________________
@@ -30,7 +30,7 @@ exports.getAddPost = (req,res) => {
 //___________________________________________ getAddPostDetail_____________________________
 exports.getPostDetail = (req,res)=> {
 
-    Post.findById(req.params.id)
+    Post.findById(req.params.id).populate( { path:'siteUser', model: User} )
         .then(post => {
 
             Category.find({}).sort({ $natural : -1})
@@ -57,7 +57,8 @@ exports.postTest = (req,res) => {
 
         Post.create({
             ...req.body,
-            post_image:`/img/postimg/${post_image.name}`
+            post_image:`/img/postimg/${post_image.name}`,
+            siteUser : req.session.userId
         })
         .then(() => {
             console.log("Post was created successfully...")

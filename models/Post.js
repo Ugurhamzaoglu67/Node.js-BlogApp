@@ -8,6 +8,10 @@ const PostSchema = new mongoose.Schema({
     content: { type : String, required : true},
     date : { type: Date, default : Date.now },
     post_image : { type: String, required:true },
+    siteUser : {
+        type: Schema.Types.ObjectId,
+        ref:'users' // MongoDB collection name: users
+    },
     category :[ {
         type : Schema.Types.ObjectId,
         ref:'categories',

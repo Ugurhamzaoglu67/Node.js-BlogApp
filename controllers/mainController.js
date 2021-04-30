@@ -1,6 +1,6 @@
 const Post = require('../models/Post')
 const Category = require('../models/Category')
-
+const User = require('../models/Users')
 
 //____________________________________ INDEX ___________________________
 exports.mainIndex = (req,res) =>{
@@ -17,13 +17,14 @@ exports.mainAbout = (req,res) =>{
 //____________________________________ BLOG ___________________________
 exports.mainBlog = (req,res) => {
 
-    Post.find({}).sort( { $natural : -1 } )
+    Post.find({}).populate( { path:'siteUser', model: User} ).sort( { $natural : -1 } )
         .then((posts) => {
            Category.find().sort({$natural:-1})
                .then(categories => {
                res.render('mysite/blog', {
                    posts:posts,
-                   categories:categories
+                   categories:categories,
+
                })
            })
         })
