@@ -16,8 +16,9 @@ ABOUTUS Section
     <div class="container">
 
         <div class="row">
+
             <div class="col-md-4">
-                <form action="#" method="POST" >
+                <form action="" method="POST" >
 
                     <div class="row">
                         <div class="col-md-12 ">
@@ -41,23 +42,42 @@ ABOUTUS Section
                 </form>
             </div>
 
+            <!-- GET CATEGORIES-->
             <div class="col-md-8">
                 <table class="table table-hover table-bordered border-primary text-dark" style="font-size: 14px;">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">DELETE</th>
-                        <th scope="col">EDIT</th>
+                        <th scope="col" class="bg-secondary text-white">ID</th>
+                        <th scope="col" class="bg-secondary text-white">NAME</th>
+                        <th scope="col" class="bg-secondary text-white">DELETE</th>
+                        <th scope="col" class="bg-secondary text-white">EDIT</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th >1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
+                    {{#each categories }}
+                        <tr>
+                            <th >{{ _id }}</th>
+                            <td>
+                                <span style="font-weight: bolder">
+                                    {{ name }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn btn-warning">
+                                        Edit
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
 
                     </tbody>
                 </table>
