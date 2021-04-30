@@ -60,3 +60,13 @@ exports.postLogin =  (req,res) => {
         })
 
 }
+
+
+
+//____________________________________ /users/logout -> GET ________________
+exports.getLogout = (req,res) => { //When logout , session destroy it
+
+    req.session.destroy(() => {
+        res.redirect('/')
+    })
+}

@@ -17,22 +17,41 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/posts/add-post">Add Post</a>
-                </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
 
+                {{#if displayLink}}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posts/add-post">Add Post</a>
+                    </li>
+
+                    <li class="nav-item  mx-2 " style="background-color: rgba(6,127,250,0.25)">
+                        <a class="nav-link  acolor" href="/users/logout">
+                            <i class="bi bi-person-x-fill"></i>   Logout
+                        </a>
+                    </li>
+
+                {{/if}}
+
+
+
+                {{#unless displayLink }}
+
+
                 <li class="nav-item bg-primary mx-2 ">
-                    <a class="nav-link acolor" href="/users/login">Login</a>
+                    <a class="nav-link acolor" href="/users/login">
+                        <i class="bi bi-box-arrow-in-right"></i> Login</a>
                 </li>
 
                 <li class="nav-item bg-success" id="register">
-                    <a class="nav-link acolor" href="/users/register">Register</a>
+                    <a class="nav-link acolor" href="/users/register">
+                        <i class="bi bi-person-plus-fill" style="font-size: 1rem;"></i>Register</a>
                 </li>
+                {{/unless}}
+
+
 
 
             </ul>

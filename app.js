@@ -32,7 +32,7 @@ mongoose.connect(dbUrl, {
 app.use(fileUpload())
 
 
-//___________________________________ SESSION __________________________________
+//___________________________________ SESSION ______________________________________
 app.use(expressSession({
     secret:'my_secret',
     resave: false,
@@ -40,13 +40,35 @@ app.use(expressSession({
     store: MongoStore.create({ mongoUrl: dbUrl })
 }))
 
-//____________________________________ Message Middleware_____________
+//____________________________________ Flash Message Middleware_____________________
 app.use((req,res,next) => {
     res.locals.sessionFlash = req.session.sessionFlash
     delete req.session.sessionFlash
 
     next()
 })
+
+//____________________________________ Display href link Middleware ___________________
+
+app.use((req, res, next) => {
+
+    const {userId} = req.session
+    if (userId) {
+        res.locals = {
+            displayLink: true
+        }
+    }
+    else {
+        res.locals = {
+            displayLink: false
+        }
+    }
+
+    next()
+
+})
+
+
 
 
 
