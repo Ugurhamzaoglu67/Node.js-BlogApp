@@ -28,6 +28,30 @@ Contact Section
 
                         <div class="col-md-6 offset-3">
                             <div class="form-group">
+                                    {{#each categories}}
+                                        <div class="form-check form-check-inline" >
+
+                                            <label class="form-check-label" style="font-weight: bolder;font-size:1rem;" for="inlineCheckbox1">
+                                                {{name}}
+                                            </label>
+                                            <input class="form-check-input" name="category" type="checkbox" id="inlineCheckbox1"
+                                                   value="{{id}}">
+
+                                        </div>
+                                    {{/each}}
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+
+                        <div class="col-md-6 offset-3">
+                            <div class="form-group">
                                 <input class="form-control" name="post_image" type="file"  required="required" data-validation-required-message="Please upload your post image">
                                 <p class="help-block text-danger"></p>
                             </div>

@@ -1,16 +1,29 @@
 const Post = require('../models/Post')
+const Category = require('../models/Category')
 const path = require('path')
 
 
 
 //___________________________________________ getAddPost_____________________________
 exports.getAddPost = (req,res) => {
-    if(req.session.userId){
-        return  res.render('mysite/addPost')
-    }
-    else {
-        return res.redirect('/users/login')
-    }
+
+           if(req.session.userId){
+
+                   Category.find()
+                       .then(categories => {
+                       return res.render('mysite/addPost',{
+                           categories:categories
+                       })
+
+                   }).catch(err =>{
+                       console.log(err)
+                   })
+
+           }
+           else {
+               return res.redirect('/users/login')
+           }
+
 
 }
 
@@ -19,9 +32,15 @@ exports.getPostDetail = (req,res)=> {
 
     Post.findById(req.params.id)
         .then(post => {
-            res.render('mysite/singlePost',{
-                post:post
+
+            Category.find({}).sort({ $natural : -1})
+                .then((categories) => {
+                    res.render('mysite/singlePost',{
+                        post:post,
+                        categories:categories
+                    })
             })
+
         })
         .catch(err => {
             console.log(err)

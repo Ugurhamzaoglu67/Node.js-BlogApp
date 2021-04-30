@@ -1,5 +1,5 @@
 const Post = require('../models/Post')
-
+const Category = require('../models/Category')
 
 
 //____________________________________ INDEX ___________________________
@@ -19,9 +19,13 @@ exports.mainBlog = (req,res) => {
 
     Post.find({}).sort( { $natural : -1 } )
         .then((posts) => {
-            res.render('mysite/blog', {
-                posts:posts
-            })
+           Category.find().sort({$natural:-1})
+               .then(categories => {
+               res.render('mysite/blog', {
+                   posts:posts,
+                   categories:categories
+               })
+           })
         })
         .catch(err => {
             console.log(err)
