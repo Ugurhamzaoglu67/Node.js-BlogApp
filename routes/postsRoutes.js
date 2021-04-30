@@ -5,7 +5,13 @@ const path = require('path')
 
 
 router.get('/add-post',(req,res) => {
-    res.render('mysite/addPost')
+        if(req.session.userId){
+          return  res.render('mysite/addPost')
+        }
+        else {
+            return res.redirect('/users/login')
+        }
+
 })
 
 

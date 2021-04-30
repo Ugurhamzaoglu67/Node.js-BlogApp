@@ -35,22 +35,24 @@ router.post('/login',(req,res) => {
         .then(user => {
             if(user){
                     if(user.password === password){
-                        console.log(`Hoş geldin : ${user.username}`)
+
+                        req.session.userId = user._id //We save as userId to the session
+
+                        console.log(`Welcome : ${user.username}`)
                         res.redirect('/')
                     }else {
-                        console.log('Şifre  yanlış, tekrar deneyin..')
+                        console.log('Password doesnt correct')
                         res.redirect('/users/login')
                     }
             }
             else {
-                console.log('Böyle bir kullanıcı yok kayıt ol')
+                console.log('There is no such user')
                 res.redirect('/users/register')
             }
         })
         .catch(err => {
             console.log(err)
         })
-
 
 
 
