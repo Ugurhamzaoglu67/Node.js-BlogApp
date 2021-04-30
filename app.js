@@ -17,7 +17,11 @@ const fileUpload = require('express-fileupload')
 
 const dbUrl = `mongodb+srv://Nodeblog_db:${process.env.DB_PASS}@cluster0.qddi3.mongodb.net/Nodeblog?retryWrites=true&w=majority`
 
-mongoose.connect(dbUrl, { useNewUrlParser:true, useUnifiedTopology:true, useCreateIndex:true})
+mongoose.connect(dbUrl, {
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true}
+)
     .then((result)=> app.listen(port,hostName, () => {
         console.log(`Bağlantı Gerçekleşti : http://${hostName}:${port}`)
     }))
@@ -28,8 +32,8 @@ app.use(fileUpload())
 
 
 const mainRoutes = require('./routes/main.js')
-const posts = require('./routes/postsRoutes')
-
+const postsRoutes = require('./routes/postsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 
 app.use(express.static('public')) //All static files....
 
@@ -60,6 +64,7 @@ app.use(bodyParser.json())
 //___________________________________  ROUTES ________________________________
 
 app.use(mainRoutes)
-app.use('/posts',posts)
+app.use('/posts',postsRoutes)
+app.use('/users',usersRoutes)
 
 

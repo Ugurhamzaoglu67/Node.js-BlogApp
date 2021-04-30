@@ -29,14 +29,6 @@ router.get('/contact',(req,res) => {
     res.render('mysite/contact')
 })
 
-router.get('/login',(req,res) => {
-    res.render('mysite/login')
-})
-
-router.get('/register', (req,res) => {
-    res.render('mysite/register')
-})
-
 
 
 
