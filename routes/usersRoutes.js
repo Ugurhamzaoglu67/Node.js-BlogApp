@@ -1,61 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/Users')
+const userController = require('../controllers/userControllers')
 
 //________________________________________ users/register___________________
-router.get('/register',(req,res) => {
-    res.render('mysite/register')
-})
+router.get('/register',userController.getRegister)
 
 
-router.post('/register',(req,res) => {
-
-    User.create(req.body)
-        .then(() => {
-            console.log("Başarı ile kullanıcı oluşturuldu")
-            res.redirect('/')
-        })
-        .catch(err =>{
-            console.log(err)
-        })
-
-})
+router.post('/register',userController.postRegister)
 
 
 //________________________________________ users/login___________________
-router.get('/login',(req,res) => {
-    res.render('mysite/login')
-})
+router.get('/login',userController.getLogin)
 
-router.post('/login',(req,res) => {
-
-   const { email, password } = req.body
-
-    User.findOne({email})
-        .then(user => {
-            if(user){
-                    if(user.password === password){
-
-                        req.session.userId = user._id //We save as userId to the session
-
-                        console.log(`Welcome : ${user.username}`)
-                        res.redirect('/')
-                    }else {
-                        console.log('Password doesnt correct')
-                        res.redirect('/users/login')
-                    }
-            }
-            else {
-                console.log('There is no such user')
-                res.redirect('/users/register')
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-
-
-})
+router.post('/login',userController.postLogin)
 
 module.exports = router

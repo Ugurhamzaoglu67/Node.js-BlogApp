@@ -40,7 +40,13 @@ app.use(expressSession({
     store: MongoStore.create({ mongoUrl: dbUrl })
 }))
 
+//____________________________________ Message Middleware_____________
+app.use((req,res,next) => {
+    res.locals.sessionFlash = req.session.sessionFlash
+    delete req.session.sessionFlash
 
+    next()
+})
 
 
 

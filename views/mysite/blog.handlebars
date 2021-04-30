@@ -6,10 +6,25 @@
 	<!--==========================
     Contact Section
 ============================-->
+
+        {{#if sessionFlash.message }}
+
+            <div class="{{sessionFlash.type }} alert-dismissible fade show offset-3 col-md-5 mt-1" role="alert">
+                <strong>{{sessionFlash.message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        {{/if}}
+
 	<section id="blog" class="md-padding">
 		<div class="container">
+
 			<div class="row">
+
 				<main id="main" class="col-md-8">
+
 					<div class="row">
 
                         {{#each posts}}

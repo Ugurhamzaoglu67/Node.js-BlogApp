@@ -12,6 +12,16 @@ Contact Section
 <section id="contact" class="md-padding">
     <div class="container">
 
+        {{#if sessionFlash.message}}
+            <div class="{{sessionFlash.type }} alert-dismissible fade show offset-2 col-md-8 mt-1" role="alert">
+                <strong>{{sessionFlash.message}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        {{/if}}
+
         <div class="row text-center">
             <div class="col-md-4 offset-md-4">
                 <div class="section-header">
