@@ -33,18 +33,37 @@ exports.getPostDetail = (req,res)=> {
     Post.findById(req.params.id).populate( { path:'siteUser', model: User} )
         .then(post => {
 
-            Category.find({}).sort({ $natural : -1})
-                .then((categories) => {
+            Category.aggregate([
+                {
+                    $lookup:{
+                        from:'posts',
+                        localField:'_id',
+                        foreignField:'category',
+                        as:'posts' //Bu şekilde al
+                    }
+                },
 
-                    Post.find().populate({path:'siteUser',model:User}).sort({$natural:-1})
-                        .then(posts => {
+                {
+                    $project:{
+                        _id:1,
+                        name:1,
+                        num_of_posts : {$size:'$posts'} //Birbiriyle ilişkili olanların sayısını alıyor..
+                    }
+                }
 
-                            res.render('mysite/singlePost',{
-                                post:post,
-                                categories:categories,
-                                posts:posts
-                            })
+
+            ])
+            .then((categories) => {
+
+                Post.find().populate({path:'siteUser',model:User}).sort({$natural:-1})
+                    .then(posts => {
+
+                        res.render('mysite/singlePost',{
+                            post:post,
+                            categories:categories,
+                            posts:posts
                         })
+                    })
 
             })
 

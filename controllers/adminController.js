@@ -1,6 +1,5 @@
 const Category = require('../models/Category')
 const Post = require('../models/Post')
-const User = require('../models/Users')
 const path = require('path')
 
 
