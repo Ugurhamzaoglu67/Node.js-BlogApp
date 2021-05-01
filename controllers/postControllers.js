@@ -35,10 +35,17 @@ exports.getPostDetail = (req,res)=> {
 
             Category.find({}).sort({ $natural : -1})
                 .then((categories) => {
-                    res.render('mysite/singlePost',{
-                        post:post,
-                        categories:categories
-                    })
+
+                    Post.find().populate({path:'siteUser',model:User}).sort({$natural:-1})
+                        .then(posts => {
+
+                            res.render('mysite/singlePost',{
+                                post:post,
+                                categories:categories,
+                                posts:posts
+                            })
+                        })
+
             })
 
         })
@@ -68,6 +75,7 @@ exports.postTest = (req,res) => {
             console.log(err)
         })
 
+        
 
         req.session.sessionFlash = {
             type:'alert alert-success',

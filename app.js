@@ -15,7 +15,7 @@ const MongoStore = require('connect-mongo');
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
 
-
+const limit  = require('./helpers/limit').limit
 
 
 
@@ -83,7 +83,7 @@ app.use(express.static('public')) //All static files....
 app.engine('handlebars', exphbs({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     defaultLayout: 'main',
-    helpers: {generateDate}
+    helpers: {generateDate,limit}
 
 
 }));
