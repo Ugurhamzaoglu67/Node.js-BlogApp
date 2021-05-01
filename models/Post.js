@@ -12,11 +12,11 @@ const PostSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref:'users' // MongoDB collection name: users
     },
-    category :[ {
+    category : {
         type : Schema.Types.ObjectId,
         ref:'categories',
         required:true
-    }]
+    }
 
 })
 

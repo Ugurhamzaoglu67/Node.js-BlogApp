@@ -1,0 +1,85 @@
+
+<!--==========================
+    INSIDE HERO SECTION Section
+============================-->
+<section class="page-image page-image-contact md-padding">
+    <h1 class="text-white text-center  ">Edit POST</h1>
+</section>
+
+<!--==========================
+Contact Section
+============================-->
+<section id="contact" class="md-padding">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="/admin/posts/{{post.id}}?_method=PUT" method="POST"  enctype="multipart/form-data">
+                  <input type="hidden" name='_method' value="PUT">
+
+
+                    <div class="row">
+                        <div class="col-md-6 offset-3">
+                            <div class="form-group">
+                                <input class="form-control" name="title" type="text"  value="{{post.title}}" required="required" data-validation-required-message="Please enter your post title">
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 offset-3">
+                            <div class="form-group">
+                                    {{#each categories}}
+                                        <div class="form-check form-check-inline" >
+
+                                            <label class="form-check-label" style="font-weight: bolder;font-size:1rem;" for="inlineCheckbox1">
+                                                {{name}}
+                                            </label>
+                                            <input class="form-check-input" name="category" type="checkbox" id="inlineCheckbox1"
+                                                   value="{{id}}">
+
+                                        </div>
+                                    {{/each}}
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+                        <div class="col-md-6 offset-3">
+                            <div class="form-group">
+                                <input class="form-control"   name="post_image" type="file"  required="required" data-validation-required-message="Please upload your post image">
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6 offset-3">
+                            <div class="form-group">
+                                <textarea class="form-control" name="content"  required="required" data-validation-required-message="Please enter post content">{{post.content}}</textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button  class="main-btn" type="submit">Update Post</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
