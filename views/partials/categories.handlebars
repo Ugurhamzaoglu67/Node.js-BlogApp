@@ -28,9 +28,10 @@
         <h3 class="mb-3">Latest Posts</h3>
 
       {{#each (limit posts 3) }}
-        <div class="widget-post">
-            <a href="/posts/detail/{{_id}}">
-                <img class="img-fluid" src="{{post_image}}" alt="">
+        <div class="widget-post mb-3" >
+            <a href="/posts/detail/{{_id}}" >
+                <img class="img-fluid " src="{{post_image}}" alt="" style="width:70px;height:50px;object-fit:
+                cover">
                 {{title}}
             </a>
             <ul class="blog-meta">

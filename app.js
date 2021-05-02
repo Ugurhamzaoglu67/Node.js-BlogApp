@@ -8,15 +8,16 @@ require('dotenv').config()
 const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const exphbs  = require('express-handlebars');
-const generateDate = require('./helpers/generateDate').generateDate
+
 const expressSession = require('express-session')
 const MongoStore = require('connect-mongo');
 
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
-
-const limit  = require('./helpers/limit').limit
-
+//________________________________ HELPERS ___________________________________________
+const {generateDate} = require('./helpers/generateDate')
+const {limit}  = require('./helpers/limit')
+const {truncate} = require('./helpers/truncate')
 
 
 
@@ -46,13 +47,7 @@ app.use(expressSession({
     store: MongoStore.create({ mongoUrl: dbUrl })
 }))
 
-//____________________________________ Flash Message Middleware_____________________
-app.use((req,res,next) => {
-    res.locals.sessionFlash = req.session.sessionFlash
-    delete req.session.sessionFlash
 
-    next()
-})
 
 //____________________________________ Display href link Middleware ___________________
 
@@ -74,7 +69,13 @@ app.use((req, res, next) => {
 
 })
 
+//____________________________________ Flash Message Middleware_____________________
+app.use((req,res,next) => {
+    res.locals.sessionFlash = req.session.sessionFlash
+    delete req.session.sessionFlash
 
+    next()
+})
 
 app.use(express.static('public')) //All static files....
 
@@ -83,7 +84,7 @@ app.use(express.static('public')) //All static files....
 app.engine('handlebars', exphbs({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     defaultLayout: 'main',
-    helpers: {generateDate,limit}
+    helpers: {generateDate,limit,truncate}
 
 
 }));
