@@ -138,3 +138,55 @@ exports.getCategoryId= (req,res) => {
            })
 
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+
+exports.getSearching = (req,res) => {
+
+    if (req.query.searching) {
+        const regex = new RegExp(escapeRegex(req.query.searching), 'gi');
+
+        Post.find( {
+            $or: [
+                {"title": regex}, {"content":regex}
+            ]
+        })
+        .populate( {path:'category', model:Category }) //Sayfada category bilgisi görünceği için aldık
+        .populate( { path:'siteUser', model:User}) //Sayfada user bilgisi görünceği için aldık
+        .sort({$natural : -1})
+        .then(posts => {
+
+            Category.aggregate([
+                {
+                    $lookup:{
+                        from:'posts',
+                        localField:'_id',
+                        foreignField:'category',
+                        as:'posts' //Bu şekilde al
+                    }
+                },
+
+                {
+                    $project:{
+                        _id:1,
+                        name:1,
+                        num_of_posts : {$size:'$posts'} //Birbiriyle ilişkili olanların sayısını alıyor..
+                    }
+                }
+
+            ]).then(categories => {
+                res.render('mysite/blog',{
+                    posts:posts,
+                    categories:categories
+                })
+            })
+
+
+        })
+    }
+
+}
+
