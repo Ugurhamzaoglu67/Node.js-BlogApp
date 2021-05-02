@@ -1,7 +1,7 @@
 const Category = require('../models/Category')
 const Post = require('../models/Post')
 const path = require('path')
-
+const User = require('../models/Users')
 
 //____________________________________ ADMIN / w \ ___________________________
 exports.adminIndex = (req,res) => {
@@ -11,13 +11,30 @@ exports.adminIndex = (req,res) => {
 
 exports.adminGetCategories = (req,res) => {
 
-    Category.find().sort( { $natural : -1 })
+        Category.find()
+        Category.aggregate([
+                {
+                    $lookup:{
+                        from:'posts',
+                        localField:'_id',
+                        foreignField:'category',
+                        as:'posts' //Bu şekilde al
+                    }
+                },
+
+                {
+                    $project:{
+                        _id:1,
+                        name:1,
+                        num_of_posts : {$size:'$posts'} //Birbiriyle ilişkili olanların sayısını alıyor..
+                    }
+                }
+
+            ])
         .then((categories) => {
 
-            console.log(categories)
             res.render('admin/admin_categories',{
                 categories : categories,
-                path:'/admin'
 
             })
         })
@@ -60,7 +77,9 @@ exports.adminPostCategories = (req,res) => {
 
 exports.adminPosts = (req,res) => {
 
-    Post.find({}).populate({path:'category',model:Category})
+    Post.find({})
+        .populate({path:'category',model:Category})
+        .populate( { path:'siteUser', model:User} )
         .sort({$natural : -1})
         .then(posts => {
             console.log(posts)

@@ -106,8 +106,9 @@ exports.postTest = (req,res) => {
 
 exports.getCategoryId= (req,res) => {
 
-       Post.find({ category:req.params.mycategoryId }).populate( { path:'category', model:Category} )
-
+       Post.find({ category:req.params.mycategoryId })
+           .populate( { path:'category', model:Category} ) // populate for Category
+           .populate( { path:'siteUser', model:User } ) //populate for User
            .then(posts => {
                console.log(req.params)
                Category.aggregate([

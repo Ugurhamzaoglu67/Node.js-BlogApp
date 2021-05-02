@@ -53,7 +53,7 @@ ABOUTUS Section
                 <table class="table table-hover table-bordered border-primary text-dark" style="font-size: 14px;">
                     <thead>
                     <tr>
-                        <th scope="col" class="bg-secondary text-white">ID</th>
+                        <th scope="col" width=90" class="bg-secondary text-white">Number of Content</th>
                         <th scope="col" class="bg-secondary text-white">NAME</th>
                         <th scope="col" class="bg-secondary text-white">DELETE</th>
                         <th scope="col" class="bg-secondary text-white">EDIT</th>
@@ -62,9 +62,9 @@ ABOUTUS Section
                     <tbody>
                     {{#each categories }}
                         <tr>
-                            <th >{{ _id }}</th>
+                            <th >{{  num_of_posts }}</th>
                             <td>
-                                <span style="font-weight: bolder">
+                             <span style="font-weight: bolder">
                                     {{ name }}
                                 </span>
                             </td>

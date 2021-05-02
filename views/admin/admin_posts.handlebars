@@ -34,16 +34,18 @@ ABOUTUS Section
                         <tr>
                             <td >{{title}}</td>
                             <td>
-                                <span style="font-weight: bolder">
-                                {{category.name}}
-                                </span>
+                                <a href="/posts/category/{{category._id}}">
+                                      <span style="font-weight: bolder">
+                                          {{category.name}}
+                                      </span>
+                                </a>
 
 
                             </td>
 
                             <td>
                                 <span style="font-weight: bolder">
-                                  {{siteUser}}
+                                  {{siteUser.username}}
 
                                 </span>
                             </td>
