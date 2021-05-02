@@ -94,13 +94,46 @@ exports.postTest = (req,res) => {
             console.log(err)
         })
 
-        
+
 
         req.session.sessionFlash = {
             type:'alert alert-success',
             message :'Post successfully added...'
         }
 
+}
 
+
+exports.getCategoryId= (req,res) => {
+
+       Post.find({ category:req.params.mycategoryId }).populate( { path:'category', model:Category} )
+
+           .then(posts => {
+               console.log(req.params)
+               Category.aggregate([
+                   {
+                       $lookup:{
+                           from:'posts',
+                           localField:'_id',
+                           foreignField:'category',
+                           as:'posts' //Bu şekilde al
+                       }
+                   },
+
+                   {
+                       $project:{
+                           _id:1,
+                           name:1,
+                           num_of_posts : {$size:'$posts'} //Birbiriyle ilişkili olanların sayısını alıyor..
+                       }
+                   }
+
+               ]).then(categories => {
+                    res.render('mysite/blog',{
+                        posts:posts,
+                        categories:categories
+                    })
+               })
+           })
 
 }

@@ -13,7 +13,10 @@
         <h3 class="mb-3">Category</h3>
         {{#each categories }}
             <div class="widget-category">
-                <a href="#">{{name}}<span style="font-weight: bolder">{{num_of_posts}}</span></a>
+                <a href="/posts/category/{{_id}}">{{name}}
+
+                    <span class="badge badge-pill badge-primary text-white" style="font-weight: bolder">{{num_of_posts}}</span>
+                </a>
 
             </div>
 
@@ -26,7 +29,7 @@
 
       {{#each (limit posts 3) }}
         <div class="widget-post">
-            <a href="#">
+            <a href="/posts/detail/{{_id}}">
                 <img class="img-fluid" src="{{post_image}}" alt="">
                 {{title}}
             </a>
