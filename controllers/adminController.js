@@ -48,7 +48,7 @@ exports.adminDeleteCategories = (req,res) => {
 
     Category.deleteOne({_id: req.params.id})
         .then((result) =>{
-            console.log(result)
+
             console.log("The deleted successfully")
             res.redirect('/admin/categories')
         })
