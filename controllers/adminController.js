@@ -124,6 +124,43 @@ exports.adminGetPostEdit = (req,res) => {
 
 };
 
+//Önce sayfası GET İle GETİR
+exports.categoryDetailEdit = (req,res) => {
+
+    Category.findOne({_id: req.params.id})
+        .then(category => {
+            console.log(category)
+            res.render('admin/editcategory',{
+                category:category
+            })
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+
+
+}
+
+exports.adminPutEditCategory = (req,res) => {
+
+    Category.findOne({_id:req.params.id})
+        .then(category => {
+            category.name = req.body.category
+
+            category.save()
+                .then(() =>{
+                    console.log('Category güncelleme başarılı..')
+                    res.redirect('/admin/categories')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }).catch(err =>{
+            console.log(err)
+         })
+
+}
+
 
 
 exports.adminPutEdit = (req,res) => {

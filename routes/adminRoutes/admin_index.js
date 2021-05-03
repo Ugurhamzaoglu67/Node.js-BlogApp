@@ -19,6 +19,8 @@ router.get('/posts/edit/:id',adminController.adminGetPostEdit)
 router.put('/posts/:id',adminController.adminPutEdit)
 
 
+router.get('/category/edit/:id',adminController.categoryDetailEdit) //SAYFA GELDİ GOSTER
+router.put('/category/:id',adminController.adminPutEditCategory) // SAYFA EDIT EDİCEK
 
 module.exports = router
 

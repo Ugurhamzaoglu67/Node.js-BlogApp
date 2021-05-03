@@ -13,6 +13,9 @@ exports.mainIndex = (req,res) =>{
 
 //____________________________________ ABOUT ___________________________
 exports.mainAbout = (req,res) =>{
+
+
+
     res.render('mysite/about')
 }
 
