@@ -11,6 +11,7 @@ router.get('/',mainController.mainIndex)
 router.get('/about',mainController.mainAbout)
 router.get('/blog',mainController.mainBlog)
 router.get('/contact',mainController.mainContact)
+router.post('/contact/email',mainController.mainPostContact)
 
 
 
