@@ -51,9 +51,15 @@ exports.postLogin =  (req,res) => {
                 }
             }
             else {
-                console.log('There is no such user')
-                res.redirect('/users/register')
+
+
+              req.session.sessionFlash = {
+                    type:'alert alert-danger',
+                    message:'There is no such user'
+                }
+                res.redirect('/users/login')
             }
+
         })
         .catch(err => {
             console.log(err)

@@ -18,6 +18,7 @@ const methodOverride = require('method-override')
 const {generateDate} = require('./helpers/generateDate')
 const {limit}  = require('./helpers/limit')
 const {truncate} = require('./helpers/truncate')
+const {paginate} = require('./helpers/paginate')
 
 
 
@@ -84,7 +85,7 @@ app.use(express.static('public')) //All static files....
 app.engine('handlebars', exphbs({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     defaultLayout: 'main',
-    helpers: {generateDate,limit,truncate}
+    helpers: {generateDate,limit,truncate,paginate}
 
 
 }));

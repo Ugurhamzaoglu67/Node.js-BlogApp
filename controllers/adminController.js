@@ -31,16 +31,16 @@ exports.adminGetCategories = (req,res) => {
                 }
 
             ])
-        .then((categories) => {
+            .then((categories) => {
 
-            res.render('admin/admin_categories',{
-                categories : categories,
+                res.render('admin/admin_categories',{
+                    categories : categories,
 
+                })
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .catch(err => {
+                console.log(err)
+            })
 
 }
 
